@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Image, StyleSheet, Text, View } from "react-native";
+import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import TodoList from "../components/TodoList";
 import { todosData } from "../data/todos";
 
@@ -11,6 +11,23 @@ export default function Home() {
         }),
     );
 
+    const [isHidden, setIsHidden] = React.useState(false);
+
+    const handleHidePress = () => {
+        if (isHidden) {
+            setIsHidden(false);
+            setLocalData(
+                todosData.sort((a, b) => {
+                    return a.isCompleted - b.isCompleted;
+                }),
+            );
+            return;
+        }
+
+        setIsHidden(!isHidden);
+        setLocalData(localData.filter((todo) => !todo.isCompleted));
+    };
+
     return (
         <View style={styles.container}>
             <Image
@@ -20,7 +37,21 @@ export default function Home() {
                 style={styles.pic}
             />
 
-            <Text style={styles.title}>Today</Text>
+            <View
+                style={{
+                    flexDirection: "row",
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                }}
+            >
+                <Text style={styles.title}>Today</Text>
+                <TouchableOpacity onPress={handleHidePress}>
+                    <Text style={{ color: "#3478f6" }}>
+                        {isHidden ? "Show Completed" : "Hide Completed"}
+                    </Text>
+                </TouchableOpacity>
+            </View>
+
             <TodoList todosData={localData.filter((todo) => todo.isToday)} />
 
             <Text style={styles.title}>Tomorrow</Text>
