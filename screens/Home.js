@@ -1,8 +1,16 @@
+import * as React from "react";
 import { Image, StyleSheet, Text, View } from "react-native";
 import TodoList from "../components/TodoList";
 import { todosData } from "../data/todos";
 
 export default function Home() {
+    const [localData, setLocalData] = React.useState(
+        // sort completed to-dos at the end of the list
+        todosData.sort((a, b) => {
+            return a.isCompleted - b.isCompleted;
+        }),
+    );
+
     return (
         <View style={styles.container}>
             <Image
@@ -13,10 +21,10 @@ export default function Home() {
             />
 
             <Text style={styles.title}>Today</Text>
-            <TodoList todosData={todosData.filter((todo) => todo.isToday)} />
+            <TodoList todosData={localData.filter((todo) => todo.isToday)} />
 
             <Text style={styles.title}>Tomorrow</Text>
-            <TodoList todosData={todosData.filter((todo) => !todo.isToday)} />
+            <TodoList todosData={localData.filter((todo) => !todo.isToday)} />
         </View>
     );
 }
