@@ -56,6 +56,10 @@ export default function Home() {
 
             <Text style={styles.title}>Tomorrow</Text>
             <TodoList todosData={localData.filter((todo) => !todo.isToday)} />
+
+            <TouchableOpacity style={styles.button}>
+                <Text style={styles.plus}>+</Text>
+            </TouchableOpacity>
         </View>
     );
 }
@@ -77,5 +81,29 @@ const styles = StyleSheet.create({
         fontWeight: "bold",
         marginBottom: 35,
         marginTop: 10,
+    },
+    button: {
+        width: 42,
+        height: 42,
+        borderRadius: 21,
+        backgroundColor: "#000",
+        position: "absolute",
+        bottom: 50,
+        right: 20,
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        shadowOpacity: 0.5,
+        shadowRadius: 5,
+        elevation: 5,
+    },
+    plus: {
+        fontSize: 40,
+        color: "#fff",
+        position: "absolute",
+        top: -9,
+        left: 9,
     },
 });
