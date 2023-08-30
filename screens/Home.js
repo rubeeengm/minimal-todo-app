@@ -2,6 +2,7 @@ import * as React from "react";
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import TodoList from "../components/TodoList";
 import { todosData } from "../data/todos";
+import { useNavigation } from "@react-navigation/native";
 
 export default function Home() {
     const [localData, setLocalData] = React.useState(
@@ -12,6 +13,7 @@ export default function Home() {
     );
 
     const [isHidden, setIsHidden] = React.useState(false);
+    const navigation = useNavigation();
 
     const handleHidePress = () => {
         if (isHidden) {
@@ -57,7 +59,10 @@ export default function Home() {
             <Text style={styles.title}>Tomorrow</Text>
             <TodoList todosData={localData.filter((todo) => !todo.isToday)} />
 
-            <TouchableOpacity style={styles.button}>
+            <TouchableOpacity
+                style={styles.button}
+                onPress={() => navigation.navigate("Add")}
+            >
                 <Text style={styles.plus}>+</Text>
             </TouchableOpacity>
         </View>
