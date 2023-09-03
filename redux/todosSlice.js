@@ -22,9 +22,9 @@ export const todosSlice = createSlice({
             state.todos = state.todos.map((todo) => {
                 if (todo.id === action.payload.id) {
                     todo.isCompleted = !todo.isCompleted;
-                } else {
-                    return todo;
                 }
+
+                return todo;
             });
         },
         deleteTodoReducer: (state, action) => {
@@ -35,7 +35,7 @@ export const todosSlice = createSlice({
 });
 
 export const {
-    setTodoReducer,
+    setTodosReducer,
     addTodoReducer,
     updateTodoReducer,
     hideCompletedReducer,
