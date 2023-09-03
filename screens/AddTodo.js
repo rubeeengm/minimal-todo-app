@@ -19,7 +19,7 @@ export default function AddTodo() {
     const [showPicker, setShowPicker] = React.useState(false);
     const [isToday, setIsToday] = React.useState(false);
 
-    const listTodos = useSelector((state) => state.todos.todos);
+    const todos = useSelector((state) => state.todos.todos);
 
     const dispatch = useDispatch();
     const navigation = useNavigation();
@@ -36,7 +36,7 @@ export default function AddTodo() {
         try {
             await AsyncStorage.setItem(
                 "@Todos",
-                JSON.stringify([...listTodos, newTodo]),
+                JSON.stringify([...todos, newTodo]),
             );
             dispatch(addTodoReducer(newTodo));
             console.log("Todo saved correctly");
